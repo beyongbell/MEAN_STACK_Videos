@@ -10,9 +10,11 @@ import { VideoService } from 'src/app/video.service';
 
 export class VideoCenterComponent implements OnInit {
 
-  videos: Array<Video>;
+  videos: Video[];
 
   selectVideo: Video;
+
+  hiddenNewVideo : boolean = true;
 
   constructor(private _videoService: VideoService) { }
 
@@ -22,7 +24,36 @@ export class VideoCenterComponent implements OnInit {
 
   onSelectVideo(video: any) {
     this.selectVideo = video;
-    console.log(this.selectVideo);
+    this.hiddenNewVideo = true;
+  }
+
+  onSubmitAddVideo(video: Video) {
+    this._videoService.postVideo(video)
+    .subscribe((response) => {
+        this.videos.push(response)
+        this.hiddenNewVideo = true;
+        this.selectVideo = response;
+    })
+  }
+
+  onUpdateVideo(video: Video) {
+    this._videoService.putVideo(video)
+    .subscribe(response => video = response)
+    this.selectVideo = null;
+  }
+
+  onDeleteVideo(video: Video) {
+    this._videoService.deleteVideo(video)
+    .subscribe(response => {
+      this.videos = this.videos.filter(function( obj ) {
+        return obj._id !== response._id;
+      });
+      this.selectVideo = null;
+    })
+  }
+
+  newVideo() {
+    this.hiddenNewVideo = false
   }
 
 }

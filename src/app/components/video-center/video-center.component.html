@@ -1,10 +1,32 @@
 <div class="row" style="margin-top:20px;">
     <div class="col s9">
-        <video-detail *ngIf="selectVideo" [video]="selectVideo"></video-detail>
+        <div *ngIf="!hiddenNewVideo">
+			<h2>New Video</h2>
+			<form #form="ngForm" (ngSubmit)="onSubmitAddVideo(form.value)">
+				<label>Title</label>
+                <input type="text" name="title" ngModel>
+
+				<label>Url</label>
+                <input type="text" name="url" ngModel>
+
+				<label>Description</label>
+                <input type="text" name="description" ngModel>
+
+				<button type="submit" class="waves-effect waves-light btn" style="margin-top: 20px;">Save</button>
+			</form>
+		</div>
+        <video-detail
+        (updateVideoEvent)="onUpdateVideo($event)"
+        (deleteVideoEvent)="onDeleteVideo($event)"
+        *ngIf="selectVideo && hiddenNewVideo"
+        [video]="selectVideo">
+        </video-detail>
     </div>
     <div class="col s3 center-align">
-        <button class="waves-effect waves-light btn"> <i class="material-icons left">add_circle</i> New Video </button>
-        <br><br>
+        <button (click)="newVideo()" class="waves-effect waves-light btn" style="margin-bottom: 20px;">
+            <i class="material-icons left">add_circle</i> 
+            New Video
+        </button>
         <video-list (SelectVideo)="onSelectVideo($event)" [videos]="videos"></video-list>
     </div>
 </div>
