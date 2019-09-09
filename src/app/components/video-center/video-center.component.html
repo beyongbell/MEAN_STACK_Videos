@@ -2,7 +2,9 @@
     <div class="col s9">
         <video-detail *ngIf="selectVideo" [video]="selectVideo"></video-detail>
     </div>
-    <div class="col s3">
+    <div class="col s3 center-align">
+        <button class="waves-effect waves-light btn"> <i class="material-icons left">add_circle</i> New Video </button>
+        <br><br>
         <video-list (SelectVideo)="onSelectVideo($event)" [videos]="videos"></video-list>
     </div>
 </div>

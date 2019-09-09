@@ -5,9 +5,9 @@ import { VideoCenterComponent } from './components/video-center/video-center.com
 
 
 const routes: Routes = [
-  { path:'', redirectTo: '/home', pathMatch: 'full' },
-  { path:'home', component: HomeComponent },
-  { path:'videos', component: VideoCenterComponent }
+  { path:'', component: HomeComponent },
+  { path:'videos', component: VideoCenterComponent },
+  { path:'**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

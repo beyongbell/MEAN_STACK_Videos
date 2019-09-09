@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-declare var $:any;
+import { Video } from './../../video';
+import { VideoService } from 'src/app/video.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,12 @@ declare var $:any;
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  videos: Array<Video>;
+
+  constructor(private _videoService: VideoService) { }
 
   ngOnInit() {
-    $('.carousel').carousel();
+    this._videoService.getVideos().subscribe(response => this.videos = response)
   }
 
 }
