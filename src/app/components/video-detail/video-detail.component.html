@@ -1,4 +1,28 @@
-{{ video.title }}
-{{ video.url }}
-{{ video.description }}
-
+<div class="row">
+    <div class="video-container">
+        <iframe width="853" height="480" [src]="video.url | safe" frameborder="0" allowfullscreen></iframe>
+      </div>
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12" *ngIf="isEditTitle">
+                <input type="text" [(ngModel)]="video.title" name="title">
+                <label class="active" for="title"> Title </label>
+            </div>
+            <h3 *ngIf="!isEditTitle" (click)="isEditTitle = true"> {{ video.title }} </h3>
+            <div class="input-field col s12">
+                <input type="text" [(ngModel)]="video.url" name="url">
+                <label class="active" for="url"> Url </label>
+            </div>
+        </div>
+        <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea class="materialize-textarea" [(ngModel)]="video.description" name="description"></textarea>
+                  <label class="active" for="description"> Description </label>
+                </div>
+              </div>
+            </form>
+        </div>
+    </form>
+</div>

@@ -9,9 +9,15 @@ export class VideoDetailComponent implements OnInit {
 
   @Input() video;
 
-  constructor() { }
+  isEditTitle:boolean = false;
+
+  constructor(){}
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    this.isEditTitle = false;
   }
 
 }
