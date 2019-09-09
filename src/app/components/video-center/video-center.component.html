@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col s9">
-        <video-detail></video-detail>
+        <video-detail *ngIf="selectVideo" [video]="selectVideo"></video-detail>
     </div>
     <div class="col s3">
-        <video-list></video-list>
+        <video-list (SelectVideo)="onSelectVideo($event)" [videos]="videos"></video-list>
     </div>
 </div>
